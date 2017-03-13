@@ -31,7 +31,7 @@ wso2::file_list:
   - "repository/components/lib/%{hiera('wso2::datasources::mssql::connector_jar')}"
   - "repository/resources/security/%{hiera('wso2::key_store')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
-wso2::datasources::mssql::connector_jar: mysql-connector-java-5.1.35-bin.jar
+
 
 wso2::ports:
   offset: 0
@@ -89,13 +89,13 @@ wso2::analytics_datasources:
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query: "%{hiera('wso2::datasources::mssql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
   wso2_analytics_processed_data_store_db:
     name: WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB
     description: The datasource used for analytics record store
-    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+    driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
     url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbanalyticsprocessed')}"
     username: "%{hiera('wso2::datasources::mssql::username')}"
     password: "%{hiera('wso2::datasources::mssql::password')}"
@@ -103,7 +103,7 @@ wso2::analytics_datasources:
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query: "%{hiera('wso2::datasources::mssql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::stats_datasources:
@@ -119,7 +119,7 @@ wso2::stats_datasources:
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query: "%{hiera('wso2::datasources::mssql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 #wso2::clustering:
