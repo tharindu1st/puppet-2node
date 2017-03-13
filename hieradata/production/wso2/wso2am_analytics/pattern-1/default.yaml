@@ -287,3 +287,7 @@ wso2::stats_datasources:
 #    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"
+wso2::hosts_mapping:
+  mysql:
+    ip: 192.168.57.210
+    name: mysql.wso2.org  

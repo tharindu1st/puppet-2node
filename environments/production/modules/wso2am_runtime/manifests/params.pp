@@ -135,7 +135,9 @@ class wso2am_runtime::params {
       username             => 'admin',
       password             => 'admin',
       jms_connection_url_1 => '',
-      jms_connection_url_2 => ''
+      jms_connection_url_2 => '',
+      receiver_url_group   => '',
+      auth_url_group       => ''
     }
 
     $environments           = {
