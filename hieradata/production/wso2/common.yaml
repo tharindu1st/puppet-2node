@@ -117,20 +117,21 @@ wso2::master_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-#  wso2user_db:
-#    name: WSO2_USER_DB
-#    description: The datasource is used for user mangement and userstore
-#    driver_class_name: org.h2.Driver
-#    url: jdbc:h2:repository/database/WSO2CARBON_DB?autoReconnect=true
-#    username: "%{hiera('wso2::datasources::common::username')}"
-#    password: "%{hiera('wso2::datasources::common::password')}"
-#    jndi_config: jdbc/WSO2_USER_DB
-#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
-#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+  wso2user_db:
+    name: WSO2_USER_DB
+    description: The datasource is used for user mangement and userstore
+    driver_class_name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://{{ db_server_1 }};databaseName=dbUserstore
+    username: "%{hiera('wso2::datasources::mssql::username')}"
+    password: "%{hiera('wso2::datasources::mssql::password')}"
+    jndi_config: jdbc/WSO2_USER_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Common datasources configuration
 wso2::datasources::common::username: 'wso2carbon'
@@ -153,6 +154,12 @@ wso2::datasources::mysql::password: 'root'
 wso2::datasources::mysql::connector_jar: 'mysql-connector-java-5.1.36-bin.jar'
 wso2::datasources::mysql::driver_class_name: 'com.mysql.jdbc.Driver'
 wso2::datasources::mysql::validation_query: 'SELECT 1'
+
+wso2::datasources::mssql::username: 'root'
+wso2::datasources::mssql::password: 'root'
+wso2::datasources::mssql::connector_jar: 'sqljdbc4.jar'
+wso2::datasources::mssql::driver_class_name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver'
+wso2::datasources::mssql::validation_query: 'SELECT 1'
 
 # KeyStores
 wso2::key_stores:
