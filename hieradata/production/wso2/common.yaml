@@ -137,7 +137,7 @@ wso2::master_datasources:
     name: WSO2_USER_DB
     description: The datasource is used for user mangement and userstore
     driver_class_name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbuserstore')}"
+    url: "jdbc:sqlserver://%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbuserstore')}"
     username: "%{hiera('wso2::datasources::mssql::username')}"
     password: "%{hiera('wso2::datasources::mssql::password')}"
     jndi_config: jdbc/WSO2_USER_DB

@@ -155,7 +155,7 @@ wso2::am_datasources:
       name: WSO2_AM_DB
       description: The datasource used for API Manager database
       driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
-      url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbam')}"
+      url: "jdbc:sqlserver://%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbam')}"
       username: "%{hiera('wso2::datasources::mssql::username')}"
       password: "%{hiera('wso2::datasources::mssql::password')}"
       jndi_config: jdbc/WSO2AM_DB
@@ -170,7 +170,7 @@ wso2::am_datasources:
      name: WSO2_MB_STORE_DB
      description: The datasource used for message broker database
      driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
-     url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbammbstore2')}"
+     url: "jdbc:sqlserver://%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbammbstore2')}"
      username: "%{hiera('wso2::datasources::common::username')}"
      password: "%{hiera('wso2::datasources::common::password')}"
      jndi_config: WSO2MBStoreDB
@@ -185,7 +185,7 @@ wso2::am_datasources:
       name: WSO2AM_STATS_DB
       description: The datasource is used for stats
       driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
-      url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbamstats')}"
+      url: "jdbc:sqlserver://%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbamstats')}"
       username: "%{hiera('wso2::datasources::mssql::username')}"
       password: "%{hiera('wso2::datasources::mssql::password')}"
       jndi_config: jdbc/WSO2AM_STATS_DB
@@ -201,7 +201,7 @@ wso2::master_datasources:
       name: WSO2_GOV_DB
       description: The datasource used for gov registry
       driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
-      url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbamreg')}"
+      url: "jdbc:sqlserver://%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbamreg')}"
       username: "%{hiera('wso2::datasources::mssql::username')}"
       password: "%{hiera('wso2::datasources::mssql::password')}"
       jndi_config: jdbc/WSO2_GOV_DB
