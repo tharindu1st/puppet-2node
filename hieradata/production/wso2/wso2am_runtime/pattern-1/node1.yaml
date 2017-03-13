@@ -70,6 +70,7 @@ wso2::apim_traffic_manager:
   jms_connection_url_2: amqp://"%{hiera('wso2::super_admin::username')}":"%{hiera('wso2::super_admin::password')}"@clientid/carbon?brokerlist='tcp://am.dev2.wso2.org:5672'
   receiver_url_group: '{tcp://localhost:9611},{tcp://am.dev2.wso2.org:9611}'
   auth_url_group: '{ssl://localhost:9711},{ssl://am.dev2.wso2.org:9711}'
+
 wso2::environments:
   apim_gateway_lan:
     host: localhost
@@ -111,6 +112,7 @@ wso2::hosts_mapping:
     ip: 192.168.57.218
     name: analytics.dev.wso2.org    
 # Use H2 based wso2_am_db in a stand-alone setup. In a clustered setup this should point to a MySQL data source
+
 wso2::is_datasource: wso2_am_db
 wso2::am_datasource: wso2_am_db
 
@@ -152,24 +154,23 @@ wso2::am_datasources:
    wso2_am_db:
       name: WSO2_AM_DB
       description: The datasource used for API Manager database
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://mysql.wso2.org:3306/apimgtdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
+      driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
+      url: jdbc:sqlserver://{{ db_server_1 }};databaseName=dbAm;
+      username: "%{hiera('wso2::datasources::mssql::username')}"
+      password: "%{hiera('wso2::datasources::mssql::password')}"
       jndi_config: jdbc/WSO2AM_DB
       max_active: "%{hiera('wso2::datasources::common::max_active')}"
       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
       default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_query: "%{hiera('wso2::datasources::mssql::validation_query')}"
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::master_datasources:
     wso2_mb_store_db:
      name: WSO2_MB_STORE_DB
      description: The datasource used for message broker database
      driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
-     url: jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+     url: jdbc:sqlserver://{{ db_server_1 }};databaseName=dbAmMbStore1;
      username: "%{hiera('wso2::datasources::common::username')}"
      password: "%{hiera('wso2::datasources::common::password')}"
      jndi_config: WSO2MBStoreDB
@@ -180,65 +181,37 @@ wso2::master_datasources:
      validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-    wso2_config_db:
-      name: WSO2_CONFIG_DB
-      description: The datasource used for config registry
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://mysql.wso2.org:3306/configdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_CONFIG_DB
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-    wso2_gov_db:
-      name: WSO2_GOV_DB
-      description: The datasource used for gov registry
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://mysql.wso2.org:3306/govregdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_GOV_DB
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-    wso2_user_db:
-      name: WSO2_USER_DB
-      description: The datasource is used for user mangement and userstore
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://mysql.wso2.org:3306/userdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
-      jndi_config: jdbc/WSO2_USER_DB
-      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
     wso2_am_stats_db:
       name: WSO2AM_STATS_DB
       description: The datasource is used for stats
-      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-      url: jdbc:mysql://mysql.wso2.org:3306/statdb?autoReconnect=true
-      username: "%{hiera('wso2::datasources::mysql::username')}"
-      password: "%{hiera('wso2::datasources::mysql::password')}"
+      driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
+      url: jdbc:sqlserver://{{ db_server_1 }};databaseName=dbAmStats;
+      username: "%{hiera('wso2::datasources::mssql::username')}"
+      password: "%{hiera('wso2::datasources::mssql::password')}"
       jndi_config: jdbc/WSO2AM_STATS_DB
       max_active: "%{hiera('wso2::datasources::common::max_active')}"
       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
       default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_query: "%{hiera('wso2::datasources::mssql::validation_query')}"
       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::master_datasources:
+    wso2_gov_db:
+      name: WSO2_GOV_DB
+      description: The datasource used for gov registry
+      driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
+      url: jdbc:sqlserver://{{ db_server_1 }};databaseName=dbGovernanceAm;
+      username: "%{hiera('wso2::datasources::mssql::username')}"
+      password: "%{hiera('wso2::datasources::mssql::password')}"
+      jndi_config: jdbc/WSO2_GOV_DB
+      max_active: "%{hiera('wso2::datasources::common::max_active')}"
+      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+      validation_query: "%{hiera('wso2::datasources::mssql::validation_query')}"
+      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
 
 wso2::enable_advance_throttling: true
 wso2::enable_thrift_server: true
@@ -272,11 +245,11 @@ wso2::usermgt_datasource: wso2_user_db
 wso2::mb_store_datasource: wso2_mb_store_db
 
 wso2::file_list:
-  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - "repository/components/lib/%{hiera('wso2::datasources::mssql::connector_jar')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
   - "repository/resources/security/%{hiera('wso2::key_store')}"
 
-wso2::datasources::mysql::connector_jar: mysql-connector-java-5.1.35-bin.jar
+wso2::datasources::mssql::connector_jar: sqljdbc4.jar
 
 wso2::analytics:
   enabled : true
