@@ -103,7 +103,7 @@ wso2::local_reg_datasource: wso2_carbon_db
 
 
 #Databases
-wso2::datasources::db::url: test.com:1443
+wso2::datasources::db::url: 54.226.116.43:1433
 wso2::datasources::db::dbam: dbAm
 wso2::datasources::db::dbamreg: dbAmReg
 wso2::datasources::db::dbammbstore1: dbAmMbStore1
@@ -133,11 +133,11 @@ wso2::master_datasources:
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-  wso2user_db:
+  wso2_user_db:
     name: WSO2_USER_DB
     description: The datasource is used for user mangement and userstore
     driver_class_name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbuserstore')}"
+    url: "jdbc:sqlserver://%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbuserstore')}"
     username: "%{hiera('wso2::datasources::mssql::username')}"
     password: "%{hiera('wso2::datasources::mssql::password')}"
     jndi_config: jdbc/WSO2_USER_DB
@@ -163,15 +163,8 @@ wso2::datasources::common::use_datasource_factory: 'false'
 wso2::datasources::h2::driver_class_name: 'org.h2.Driver'
 wso2::datasources::h2::validation_query: 'SELECT 1'
 
-# MySQL datasources configuration
-wso2::datasources::mysql::username: 'root'
-wso2::datasources::mysql::password: 'root'
-wso2::datasources::mssql::connector_jar: 'mysql-connector-java-5.1.36-bin.jar'
-wso2::datasources::mysql::driver_class_name: 'com.mysql.jdbc.Driver'
-wso2::datasources::mysql::validation_query: 'SELECT 1'
-
-wso2::datasources::mssql::username: 'root'
-wso2::datasources::mssql::password: 'root'
+wso2::datasources::mssql::username: 'Wso2DbUser'
+wso2::datasources::mssql::password: 'wso212#'
 wso2::datasources::mssql::connector_jar: 'sqljdbc4.jar'
 wso2::datasources::mssql::driver_class_name: 'com.microsoft.sqlserver.jdbc.SQLServerDriver'
 wso2::datasources::mssql::validation_query: 'SELECT 1'
@@ -237,7 +230,7 @@ wso2::user_management:
 
 # class responsible for installing Java
 # Plugin any 3rd party class here as you wish
-java_class: wso2base::java
+java_class: java
 
 # symlink to Java install directory
 java_home: /opt/java
@@ -254,6 +247,7 @@ wso2base::java::wso2_group: "%{hiera('wso2::group')}"
 wso2base::java::java_home: /opt/java
 wso2base::java::prefs_system_root: "%{hiera('java_prefs_system_root')}"
 wso2base::java::prefs_user_root: "%{hiera('java_prefs_user_root')}"
+#wso2base::java::deploymentdir: /opt/java
 
 packages:
   - zip
