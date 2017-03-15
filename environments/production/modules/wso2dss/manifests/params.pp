@@ -224,7 +224,7 @@ class wso2dss::params {
   }
 
   $product_name               = 'wso2dss'
-  $product_version            = '3.5.0'
+  $product_version            = '3.5.1'
   $platform_version           = '4.4.0'
   $carbon_home                = "${install_dir}/${product_name}-${product_version}"
   $pack_file_abs_path         = "${pack_dir}/${pack_filename}"
