@@ -69,6 +69,7 @@ class wso2dss (
   $fqdn                   = $wso2dss::params::fqdn,
   $sso_authentication     = $wso2dss::params::sso_authentication,
   $user_management        = $wso2dss::params::user_management
+  $remove_file_list       = $wso2dss::params::remove_file_list,
 ) inherits wso2dss::params {
 
   validate_string($taskServerCount)
