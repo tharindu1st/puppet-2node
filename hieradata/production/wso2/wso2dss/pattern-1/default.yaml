@@ -42,7 +42,7 @@ wso2::master_datasources:
     name: WSO2_GOV_DB
     description: The datasource used for gov registry
     driver_class_name: "%{hiera('wso2::datasources::mssql::driver_class_name')}"
-    url: "jdbc:sqlserver://"%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbdssreg')}"
+    url: "jdbc:sqlserver://%{hiera('wso2::datasources::db::url')};databaseName=%{hiera('wso2::datasources::db::dbdssreg')}"
     username: "%{hiera('wso2::datasources::mssql::username')}"
     password: "%{hiera('wso2::datasources::mssql::password')}"
     jndi_config: jdbc/WSO2_GOV_DB
