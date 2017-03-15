@@ -69,7 +69,6 @@ class wso2dss (
   $fqdn                   = $wso2dss::params::fqdn,
   $sso_authentication     = $wso2dss::params::sso_authentication,
   $user_management        = $wso2dss::params::user_management
-  $remove_file_list       = $wso2dss::params::remove_file_list,
 ) inherits wso2dss::params {
 
   validate_string($taskServerCount)
@@ -125,7 +124,8 @@ class wso2dss (
     secure_vault_configs   => $secure_vault_configs,
     key_stores             => $key_stores,
     carbon_home            => $carbon_home,
-    pack_file_abs_path     => $pack_file_abs_path
+    pack_file_abs_path     => $pack_file_abs_path,
+    remove_file_list       => $remove_file_list,
   }
 
   contain wso2base
