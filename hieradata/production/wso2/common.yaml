@@ -237,7 +237,7 @@ wso2::user_management:
   ldap:
     disabled: 'true'
     connection_url: 'ldaps://sldap.test.com:636'
-    connection_name: 'SVC-WSO2-LDAP'
+    connection_name: 'ldapadmin'
     connection_password: 'testpassword'
     user_search_base: 'DC=TEST,DC=COM'
     group_search_base: 'DC=TEST,DC=COM'
