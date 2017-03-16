@@ -35,7 +35,7 @@ wso2::template_list:
 
 wso2::taskServerCount: 1
 
-#wso2::usermgt_datasource: wso2_user_db
+wso2::usermgt_datasource: wso2_user_db
 
 wso2::master_datasources:
   wso2_gov_db:
