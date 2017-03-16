@@ -234,6 +234,14 @@ wso2::user_management:
   admin_role: admin
   admin_username: "%{hiera('wso2::super_admin::username')}"
   admin_password: "%{hiera('wso2::super_admin::password')}"
+  ldap:
+    disabled: 'true'
+    connection_url: 'ldaps://sldap.test.com:636'
+    connection_name: 'SVC-WSO2-LDAP'
+    connection_password: 'testpassword'
+    user_search_base: 'DC=TEST,DC=COM'
+    group_search_base: 'DC=TEST,DC=COM'
+
 
 # class responsible for installing Java
 # Plugin any 3rd party class here as you wish
